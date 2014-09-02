@@ -1,0 +1,36 @@
+CTYPE html>
+<html>
+<head>
+<script>
+function startTime() {
+    var today = new Date();
+    var h = decbin(today.getHours());
+    var m = decbin(today.getMinutes());
+    var s = decbin(today.getSeconds());
+    h = checkTime(h,5);
+    m = checkTime(m,6);
+    s = checkTime(s,6);
+    document.getElementById('txt').innerHTML = h+":"+m+":"+s;
+    var t = setTimeout(function(){startTime()},1000);
+}
+
+function checkTime(n, width, z) {
+    z = z || '0';
+    n = n + '';
+    return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+}
+
+function decbin(number) {
+    if(number < 0){
+       number = 0xFFFFFFFF + number + 1;
+    }
+    return parseInt(number, 10)
+    .toString(2);
+}
+</script>
+</head>
+<body onload="startTime()">
+	<div id="txt" style="font-size:27px;"></div>
+</body>
+</html>
+
